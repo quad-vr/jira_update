@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_quad_vr_jira_update_1730141235792-push-trigger-input-set
+  identifier: Build_quad_vr_jira_update_1730141235792pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: Jira_update
+  pipeline:
+    identifier: Build_quad_vr_jira_update_1730141235792
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
