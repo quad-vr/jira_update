@@ -32,19 +32,25 @@ pipeline:
                   identifier: installdependencies
                   name: install dependencies
                   spec:
-                    command: pip install tox
+                    shell: Sh
+                    command: |-
+                      pip install tox
+                      pip install -r requirements.txt
                   timeout: ""
                   type: Run
               - step:
                   identifier: runtests
                   name: run tests
                   spec:
-                    command: tox
+                    shell: Sh
+                    command: |-
+                      tox
+                      python jira_update.py
                     reports:
+                      type: JUnit
                       spec:
                         paths:
                           - "**/*.xml"
-                      type: JUnit
                   timeout: ""
                   type: Run
               - step:
@@ -55,9 +61,9 @@ pipeline:
                   timeout: ""
                   type: Run
           platform:
-            arch: Amd64
             os: Linux
+            arch: Amd64
           runtime:
-            spec: {}
             type: Cloud
+            spec: {}
         type: CI
