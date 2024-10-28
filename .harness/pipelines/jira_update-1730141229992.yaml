@@ -1,0 +1,63 @@
+pipeline:
+  identifier: Build_quad_vr_jira_update_1730141235792
+  name: Build jira_update
+  orgIdentifier: default
+  projectIdentifier: Jira_update
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: account.Github_OAuth_1728911894082
+        repoName: quad-vr/jira_update
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          caching:
+            enabled: true
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  identifier: runlinter
+                  name: run linter
+                  spec:
+                    command: |-
+                      pip install flake8
+                      flake8 .
+                  timeout: ""
+                  type: Run
+              - step:
+                  identifier: installdependencies
+                  name: install dependencies
+                  spec:
+                    command: pip install tox
+                  timeout: ""
+                  type: Run
+              - step:
+                  identifier: runtests
+                  name: run tests
+                  spec:
+                    command: tox
+                    reports:
+                      spec:
+                        paths:
+                          - "**/*.xml"
+                      type: JUnit
+                  timeout: ""
+                  type: Run
+              - step:
+                  identifier: getcoverage
+                  name: get coverage
+                  spec:
+                    command: tox -e coverage
+                  timeout: ""
+                  type: Run
+          platform:
+            arch: Amd64
+            os: Linux
+          runtime:
+            spec: {}
+            type: Cloud
+        type: CI
