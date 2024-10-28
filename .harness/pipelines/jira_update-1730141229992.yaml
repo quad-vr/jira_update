@@ -43,7 +43,7 @@ pipeline:
                   name: run tests
                   spec:
                     shell: Sh
-                    command: tox
+                    command: tox -e lint
                     reports:
                       type: JUnit
                       spec:
