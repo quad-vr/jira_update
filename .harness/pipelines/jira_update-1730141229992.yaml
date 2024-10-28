@@ -24,7 +24,7 @@ pipeline:
                   name: run linter
                   spec:
                     shell: Sh
-                    command: flake8 *.py
+                    command: sudo apt-get install flake8.
                   timeout: ""
                   type: Run
               - step:
