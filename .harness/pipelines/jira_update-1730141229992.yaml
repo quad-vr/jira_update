@@ -43,9 +43,7 @@ pipeline:
                   name: run tests
                   spec:
                     shell: Sh
-                    command: |-
-                      tox
-                      python jira_update.py
+                    command: tox
                     reports:
                       type: JUnit
                       spec:
