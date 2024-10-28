@@ -32,7 +32,16 @@ pipeline:
                   name: install dependencies
                   spec:
                     shell: Sh
-                    command: pip install tox
+                    command: |-
+                      pip install tox
+                      steps:
+                        - name: Install Dependencies
+                          run: |
+                            sudo apt-get update
+                            sudo apt-get install -y software-properties-common
+                            sudo add-apt-repository universe
+                            sudo apt-get update
+                            sudo apt-get install -y libkrb5-dev
                   timeout: ""
                   type: Run
               - step:
