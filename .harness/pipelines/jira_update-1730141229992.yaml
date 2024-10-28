@@ -40,7 +40,9 @@ pipeline:
                   name: run tests
                   spec:
                     shell: Sh
-                    command: tox
+                    command: |-
+                      sudo apt-get install libkrb5-dev
+                      tox
                     reports:
                       type: JUnit
                       spec:
